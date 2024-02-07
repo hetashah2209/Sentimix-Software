@@ -1,0 +1,144 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://t4.ftcdn.net/jpg/06/10/43/89/360_F_610438945_oRLr15XzfkffK8LC14lLNJlSf5qGU5fv.jpg') center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .result-container {
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <title>Sentiment Analysis Result</title>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Sentiment Analysis Result</h1>
+        <h2 id="result">Sentiment: {{ sentiment }}</h2>
+        <a href="/">Go back</a>
+    </div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://webz.io/wp-content/uploads/2023/02/How-Can-News-API-Supercharge-Your-Sentiment-Analysis-1-830x366.jpg') center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .result-container {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .positive {
+            color: green;
+        }
+
+        .negative {
+            color: red;
+        }
+
+        .neutral {
+            color: gray;
+        }
+    </style>
+    <title>Sentiment Analysis Result</title>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Sentiment Analysis Result</h1>
+        <table>
+            <tr>
+                <th>Sentence</th>
+                <th>Sentiment</th>
+            </tr>
+            {% for index, row in df.iterrows() %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td class="{% if row['Sentiment'] == 'POSITIVE' %}positive{% elif row['Sentiment'] == 'NEGATIVE' %}negative{% else %}neutral{% endif %}">
+                        {{ row['Sentiment'] }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="/">Go back</a>
+    </div>
+</body>
+</html>

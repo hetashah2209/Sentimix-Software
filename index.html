@@ -1,0 +1,162 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://t4.ftcdn.net/jpg/06/10/43/89/360_F_610438945_oRLr15XzfkffK8LC14lLNJlSf5qGU5fv.jpg') center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+    <title>Sentiment Analysis</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+        <form action="/analyze" method="post">
+            <label for="user_input">Enter a sentence for sentiment analysis:</label>
+            <input type="text" name="user_input" required>
+            <button type="submit">Analyze</button>
+        </form>
+        <h2 id="result"> </h2>
+    </div>
+</body>
+</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://webz.io/wp-content/uploads/2023/02/How-Can-News-API-Supercharge-Your-Sentiment-Analysis-1-830x366.jpg') center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+    <title>Sentiment Analysis</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+        <form action="/analyze" method="post" enctype="multipart/form-data">
+            <label for="file">Upload an Excel file:</label>
+            <input type="file" name="file" accept=".xlsx, .xls" required>
+            <button type="submit">Analyze</button>
+        </form>
+        <h2 id="result"> </h2>
+    </div>
+</body>
+</html>
