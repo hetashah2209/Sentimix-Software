@@ -60,7 +60,7 @@
 </html>
 -->
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -73,31 +73,39 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
+            font-size: 16px;
+            overflow-y: auto; /* Allow vertical scrolling */
         }
 
         .result-container {
+            width: 95%;
             max-width: 800px;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 10px;
         }
 
         h1 {
             text-align: center;
             color: #333;
+            margin-top: 0;
         }
 
         table {
             width: 100%;
+            overflow-x: auto;
             border-collapse: collapse;
             margin-top: 20px;
         }
 
         th, td {
+            white-space: nowrap;
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
@@ -117,6 +125,12 @@
 
         .neutral {
             color: gray;
+        }
+
+        @media only screen and (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
         }
     </style>
     <title>Sentiment Analysis Result</title>
@@ -138,6 +152,211 @@
                 </tr>
             {% endfor %}
         </table>
+        <a href="/">Go back</a>
+    </div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://webz.io/wp-content/uploads/2023/02/How-Can-News-API-Supercharge-Your-Sentiment-Analysis-1-830x366.jpg') center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-size: 16px;
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+
+        .result-container {
+            width: 95%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            overflow-x: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            white-space: nowrap;
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .positive {
+            color: green;
+        }
+
+        .negative {
+            color: red;
+        }
+
+        .neutral {
+            color: gray;
+        }
+
+        /* Adjustments for charts */
+        canvas {
+            max-width: 100%; /* Make the canvas responsive */
+            margin-top: 10px; /* Adjust space above the charts */
+        }
+
+        @media only screen and (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to create and display bar and pie charts
+            function displayCharts() {
+                // Get the sentiment data from the rendered HTML
+                var sentiments = document.querySelectorAll('.sentiment');
+                var sentimentData = Array.from(sentiments).map(function (element) {
+                    return element.textContent.trim();
+                });
+
+                // Count occurrences of each sentiment
+                var sentimentCounts = {
+                    'POSITIVE': 0,
+                    'NEGATIVE': 0,
+                    'NEUTRAL': 0
+                };
+
+                sentimentData.forEach(function (sentiment) {
+                    sentimentCounts[sentiment] += 1;
+                });
+
+                // Create a bar chart
+                var barChartCanvas = document.getElementById('barChart');
+                var barChartContext = barChartCanvas.getContext('2d');
+                var barChart = new Chart(barChartContext, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(sentimentCounts),
+                        datasets: [{
+                            label: 'Sentiment Counts',
+                            data: Object.values(sentimentCounts),
+                            backgroundColor: ['#4caf50', '#f44336', '#808080'],
+                            borderColor: '#333',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Count'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Sentiment'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Create a pie chart
+                var pieChartCanvas = document.getElementById('pieChart');
+                var pieChartContext = pieChartCanvas.getContext('2d');
+                var pieChart = new Chart(pieChartContext, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(sentimentCounts),
+                        datasets: [{
+                            data: Object.values(sentimentCounts),
+                            backgroundColor: ['#4caf50', '#f44336', '#808080'],
+                            borderColor: '#333',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Add a click event listener to the 'Visualize Charts' button
+            var visualizeButton = document.getElementById('visualizeButton');
+            if (visualizeButton) {
+                visualizeButton.addEventListener('click', function () {
+                    // Display the charts
+                    displayCharts();
+                });
+            }
+        });
+    </script>
+
+    <title>Sentiment Analysis Result</title>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Sentiment Analysis Result</h1>
+        <table>
+            <tr>
+                <th>Sentence</th>
+                <th>Sentiment</th>
+            </tr>
+            {% for index, row in df.iterrows() %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td class="sentiment {% if row['Sentiment'] == 'POSITIVE' %}positive{% elif row['Sentiment'] == 'NEGATIVE' %}negative{% else %}neutral{% endif %}">
+                        {{ row['Sentiment'] }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <!-- Add a button to trigger the chart visualization -->
+        <button id="visualizeButton">Visualize Charts</button>
+
+        <!-- Add canvas elements for the bar and pie charts -->
+        <canvas id="barChart" width="400" height="200"></canvas>
+        <canvas id="pieChart" width="400" height="200"></canvas>
+
         <a href="/">Go back</a>
     </div>
 </body>
